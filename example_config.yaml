@@ -1,0 +1,47 @@
+events:
+    enabled: true
+    subscriptions:
+    -   command: sudo python ~/scripts/octopi-neopixel/neopixel_status.py --event
+            home
+        enabled: false
+        event: Home
+        type: system
+    -   command: sudo python ~/scripts/octopi-neopixel/neopixel_status.py --event
+            connected
+        enabled: true
+        event: Connected
+        type: system
+    -   command: sudo python ~/scripts/octopi-neopixel/neopixel_status.py --event
+            disconnected
+        enabled: true
+        event: Disconnected
+        type: system
+    -   command: sudo python ~/scripts/octopi-neopixel/neopixel_status.py --event
+            printstarted
+        enabled: true
+        event:
+        - PrintStarted
+        - PrintResumed
+        type: system
+    -   command: sudo python ~/scripts/octopi-neopixel/neopixel_status.py --event
+            printpaused
+        enabled: true
+        event: PrintPaused
+        type: system
+    -   command: sudo python ~/scripts/octopi-neopixel/neopixel_status.py --event
+            printfailed
+        enabled: true
+        event:
+        - PrintFailed
+        - PrintCancelled
+        type: system
+    -   command: sudo python ~/scripts/octopi-neopixel/neopixel_status.py --event
+            printdone
+        enabled: true
+        event: PrintDone
+        type: system
+    -   command: sudo python ~/scripts/octopi-neopixel/neopixel_status.py --event
+            cooling
+        enabled: true
+        event: Cooling
+        type: system
