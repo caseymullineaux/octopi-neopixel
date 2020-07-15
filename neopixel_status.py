@@ -1,7 +1,6 @@
 import time
 from rpi_ws281x import PixelStrip, Color
 import argparse
-import enum
 
 LED_COUNT = 6
 LED_PIN = 18
