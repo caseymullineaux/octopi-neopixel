@@ -3,7 +3,7 @@ from rpi_ws281x import PixelStrip, Color
 import argparse
 import enum
 
-LED_COUNT = 10
+LED_COUNT = 6
 LED_PIN = 18
 LED_FREQ_HZ = 800000  # LED signal frequency in hertz (usually 800khz)
 LED_DMA = 10          # DMA channel to use for generating signal (try 10)
@@ -17,18 +17,22 @@ def flash(count=3, delay=1, color=Color(255,255,255)):
 
     i = 0
     while i < count:
-        strip.setPixelColor(0, color) # RED
+        for pixel in range(strip.numPixels()):
+            strip.setPixelColor(pixel, color)
         strip.show()
         time.sleep(delay)
-        strip.setPixelColor(0, Color(0,0,0)) # RED
+
+        for pixel in range(strip.numPixels()):
+            strip.setPixelColor(pixel, Color(0,0,0))
         strip.show()
         time.sleep(delay)
+
         i+=1
 
 if __name__ == '__main__':
     # process arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument('-e', '--event', help='')
+    parser.add_argument('-s', '--status', help='')
     args = parser.parse_args()
 
     # Create NeoPixel object with appropriate configuration.
@@ -39,19 +43,28 @@ if __name__ == '__main__':
 
     if args.event == 'start':
         flash(color=Color(0,255,0)) # GREEN
+
     if args.event == 'complete':
-        flash(count=10,color=Color(255,0,255))
+        flash(count=10,color=Color(255,0,255)) # PURPLE
+
     if args.event == 'heat':
-        strip.setPixelColor(0,Color(255,0,0)) # RED
+        for pixel in range(strip.numPixels()):
+            strip.setPixelColor(pixel,Color(255,0,0)) # RED
         strip.show()
+
     if args.event == 'cooldown':
-        strip.setPixelColor(0,Color(0,0,255)) # BLUE
+        for pixel in range(strip.numPixels()):
+            strip.setPixelColor(pixel,Color(0,0,255)) # BLUE
         strip.show()
+
     if args.event == 'print':
-        strip.setPixelColor(0,Color(255,255,255)) # WHITE
+        for pixel in range(strip.numPixels()):
+            strip.setPixelColor(pixel,Color(255,255,255)) # WHITE
         strip.show()
+
     if args.event == 'off':
-        strip.setPixelColor(0,Color(0,0,0)) # OFF
+        for pixel in range(strip.numPixels()):
+            strip.setPixelColor(pixel,Color(0,0,0)) # OFF
         strip.show()
 
 
